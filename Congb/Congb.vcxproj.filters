@@ -27,9 +27,15 @@
     <ClInclude Include="src\Congb\EntryPoint.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="src\Congb\Log.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Congb\Application.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Congb\Log.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
