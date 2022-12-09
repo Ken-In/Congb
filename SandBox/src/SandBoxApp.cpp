@@ -15,6 +15,7 @@ public:
 
 	void Run()
 	{
+		printf("SandBoxRun");
 		while (true);
 	}
 };
