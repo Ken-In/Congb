@@ -1,6 +1,8 @@
 # Congb
 Congb Engine
 
+点击GenerateProject.bat就可以生成项目，点击sln，将SandBox设为启动项目，因为SandBox依赖Congb的dll，第一次运行会报错，第二次运行就没问题了。
+
 闲着无聊就撸个引擎吧！
 
 - 添加了EntryPoint
