@@ -1,5 +1,5 @@
+#include "cbpch.h"
 #include "Application.h"
-#include <stdio.h>
 
 #include "Congb/Events/ApplicationEvent.h"
 #include "Congb/Log.h"

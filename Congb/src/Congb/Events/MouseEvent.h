@@ -3,8 +3,6 @@
 #include "Congb/Core.h"
 #include "Event.h"
 
-#include <sstream>
-
 namespace Congb {
 
 	class CONGB_API MouseMovedEvent : public Event 

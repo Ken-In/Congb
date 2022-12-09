@@ -2,9 +2,6 @@
 
 #include "Congb/Core.h"
 
-#include <string>
-#include <functional>
-
 namespace Congb {
 
 

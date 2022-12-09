@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Congb {
 
 	//因为键盘按键事件 分 按下 和 弹起 两个事件 所以我们再写个接口类 

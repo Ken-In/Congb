@@ -18,6 +18,9 @@ project "Congb"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
+	pchheader "cbpch.h"
+	pchsource "Congb/src/cbpch.cpp"
+
 	files
 	{
 		"%{prj.name}/src/**.h",
