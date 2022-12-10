@@ -1,5 +1,6 @@
 workspace "Congb"
-	architecture "x86_64"
+	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -9,6 +10,12 @@ workspace "Congb"
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+-- Include directories relative to root folder (solition directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Congb/vendor/GLFW/include"
+
+include "Congb/vendor/GLFW"
 
 project "Congb"
 	location "Congb"
@@ -30,7 +37,14 @@ project "Congb"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
+	}
+
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
