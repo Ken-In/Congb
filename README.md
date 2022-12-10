@@ -10,3 +10,4 @@ Congb Engine
 - 添加了premake来生成项目
 - 添加了EventSystem
 - 添加了预编译头文件PCH
+- 添加Window抽象和GLFW
