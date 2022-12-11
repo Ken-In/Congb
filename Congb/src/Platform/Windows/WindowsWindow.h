@@ -2,6 +2,7 @@
 
 #include "Congb/Window.h"
 
+
 #include <GLFW/glfw3.h>
 
 namespace Congb {
@@ -17,7 +18,7 @@ namespace Congb {
 		inline unsigned int GetWidth() const override { return m_Data.Width; }
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
 
-		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.Eventallback = callback; }
+		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.Eventcallback = callback; }
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
 
@@ -34,7 +35,7 @@ namespace Congb {
 			unsigned int Width,Height;
 			bool VSync;
 
-			EventCallbackFn Eventallback;
+			EventCallbackFn Eventcallback;
 		};
 
 		WindowData m_Data;
