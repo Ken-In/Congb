@@ -41,6 +41,8 @@ namespace Congb {
 		virtual int GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 
+		bool Handled() { return m_Handled; }
+
 		//查询是否在这个类型下
 		inline bool IsInCategory(EventCategory category)
 		{
