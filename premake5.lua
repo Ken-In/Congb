@@ -14,8 +14,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solition directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Congb/vendor/GLFW/include"
+IncludeDir["Glad"] = "Congb/vendor/Glad/include"
 
 include "Congb/vendor/GLFW"
+include "Congb/vendor/Glad"
 
 project "Congb"
 	location "Congb"
@@ -38,12 +40,14 @@ project "Congb"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
 
 	links
 	{
 		"GLFW",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -55,7 +59,8 @@ project "Congb"
 		defines
 		{
 			"CB_PLATFORM_WINDOWS",
-			"CB_BUILD_DLL"
+			"CB_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands
