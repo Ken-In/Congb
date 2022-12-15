@@ -4,3 +4,6 @@
 [submodule "Congb/vendor/GLFW"]
 	path = Congb/vendor/GLFW
 	url = https://github.com/Ken-In/glfw
+[submodule "Congb/vendor/imgui"]
+	path = Congb/vendor/imgui
+	url = https://github.com/Ken-In/imgui

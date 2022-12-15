@@ -1,6 +1,6 @@
 workspace "Congb"
 	architecture "x64"
-	startproject "Sandbox"
+	startproject "SandBox"
 
 	configurations
 	{
@@ -15,9 +15,11 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Congb/vendor/GLFW/include"
 IncludeDir["Glad"] = "Congb/vendor/Glad/include"
+IncludeDir["ImGui"] = "Congb/vendor/imgui"
 
 include "Congb/vendor/GLFW"
 include "Congb/vendor/Glad"
+include "Congb/vendor/imgui"
 
 project "Congb"
 	location "Congb"
@@ -41,13 +43,15 @@ project "Congb"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib"
 	}
 
