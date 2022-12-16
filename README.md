@@ -1,7 +1,7 @@
 # Congb
 Congb Engine
 
-闲着无聊就撸个引擎吧！
+闲着无聊就撸个引擎吧！参考项目：https://github.com/TheCherno/Hazel
 
 该项目使用vs2022编译，暂时只支持Windows。
 
@@ -17,3 +17,4 @@ Congb Engine
 - 添加Layer
 - 添加Glad
 - 添加ImGui
+- 添加事件到ImGui
