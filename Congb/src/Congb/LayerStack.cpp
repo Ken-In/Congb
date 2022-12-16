@@ -14,11 +14,13 @@ namespace Congb {
 			delete layer;
 	}
 
+	//普通层push 插入到vector指定位置
 	void LayerStack::PushLayer(Layer* layer)
 	{
 		m_layerInsert = m_layers.emplace(m_layerInsert, layer);
 	}
 
+	//覆盖层push到最后 因为layers执行时是从后向前执行 所以覆盖层先执行
 	void LayerStack::PushOverlay(Layer* overlay)
 	{
 		m_layers.emplace_back(overlay);

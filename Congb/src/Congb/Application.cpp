@@ -17,10 +17,9 @@ namespace Congb {
 		s_Instance = this;
 
 		m_Window = std::unique_ptr<Window>(Window::Create());
+		//设置回调函数
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
-		unsigned int id;
-		glGenVertexArrays(1, &id);
 	}
 
 	Application::~Application()
@@ -42,9 +41,11 @@ namespace Congb {
 
 	void Application::OnEvent(Event & e)
 	{
+		//当e为关闭事件时 调用OnWindowClosed
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClosed));
 
+		//遍历层栈 每层依次处理事件 直到事件处理完成跳出
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
 			(*--it)->OnEvent(e);

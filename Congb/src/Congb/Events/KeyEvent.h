@@ -58,4 +58,22 @@ namespace Congb {
 
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
+
+	class CONGB_API KeyTypedEvent : public KeyEvent
+	{
+	public:
+		// 调用父类构造 并且记录重复次数
+		KeyTypedEvent(int keycode)
+			: KeyEvent(keycode){}
+
+		std::string ToString() const override
+		{
+			std::stringstream ss;
+			ss << "KeyTypedEvent: " << m_KeyCode;
+			return ss.str();
+		}
+
+		//纯虚函数宏
+		EVENT_CLASS_TYPE(KeyTyped)
+	};
 }
