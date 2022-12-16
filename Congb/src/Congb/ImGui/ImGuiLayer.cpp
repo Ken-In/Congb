@@ -128,6 +128,7 @@ namespace Congb {
 		//io.AddMouseWheelEvent(e.GetXoffset(), e.GetYoffset());
  		io.MouseWheelH += e.GetXoffset();
  		io.MouseWheel += e.GetYoffset();
+		CB_CORE_WARN("OnMouseScrolledEvent {0} {1}", e.GetXoffset(), e.GetYoffset() );
 		return false;
 	}
 
@@ -140,6 +141,8 @@ namespace Congb {
 		io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
 		io.KeyAlt = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
 		io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+
+		CB_CORE_WARN("KeysDown: {0}", e.GetKeyCode() );
 		return false;
 	}
 
