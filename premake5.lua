@@ -112,6 +112,7 @@ project "SandBox"
 	{
 		"Congb/vendor/spdlog/include",
 		"Congb/src",
+		"Congb/vendor",
 		"%{IncludeDir.glm}"
 	}
 

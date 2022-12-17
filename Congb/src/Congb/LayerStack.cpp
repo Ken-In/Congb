@@ -5,7 +5,6 @@ namespace Congb {
 
 	LayerStack::LayerStack()
 	{
-		m_layerInsert = m_layers.begin();
 	}
 
 	LayerStack::~LayerStack()
@@ -17,7 +16,7 @@ namespace Congb {
 	//普通层push 插入到vector指定位置
 	void LayerStack::PushLayer(Layer* layer)
 	{
-		m_layerInsert = m_layers.emplace(m_layerInsert, layer);
+		m_layers.emplace(m_layers.begin() + m_layerInsertIndex++, layer);
 	}
 
 	//覆盖层push到最后 因为layers执行时是从后向前执行 所以覆盖层先执行
@@ -32,7 +31,7 @@ namespace Congb {
 		if (it != m_layers.end())
 		{
 			m_layers.erase(it);
-			m_layerInsert--;
+			m_layerInsertIndex--;
 		}
 	}
 

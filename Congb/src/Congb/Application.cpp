@@ -22,6 +22,9 @@ namespace Congb {
 		//设置回调函数
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
+		m_ImGuiLayer = new ImGuiLayer();
+
+		PushOverLay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -64,8 +67,13 @@ namespace Congb {
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+// 			for (auto layer : m_LayerStack)
+// 				layer->OnUpdate();
+
+			m_ImGuiLayer->Begin();
 			for (auto layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnImGuiRender();
+			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();
 		}

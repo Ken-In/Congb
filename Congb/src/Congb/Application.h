@@ -6,6 +6,8 @@
 #include "Events/Event.h"
 #include "Congb/Events/ApplicationEvent.h"
 
+#include "Congb/ImGui/ImGuiLayer.h"
+
 
 namespace Congb{
 	class CONGB_API Application
@@ -28,6 +30,7 @@ namespace Congb{
 
 	private:
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

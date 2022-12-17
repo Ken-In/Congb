@@ -1,6 +1,8 @@
 #include "cbpch.h"
 #include "Congb.h"
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Congb::Layer
 {
 public:
@@ -13,6 +15,13 @@ public:
 
 		if (Congb::Input::IsKeyPressed(CB_KEY_TAB))
 			CB_INFO("Tab key is pressed!");
+	}
+
+	void OnImGuiRender() override
+	{
+// 		ImGui::Begin("Test");
+// 		ImGui::Text("Hello World");
+// 		ImGui::End();
 	}
 
 	void OnEvent(Congb::Event& event) override
@@ -33,7 +42,6 @@ public:
 	SandBox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverLay(new Congb::ImGuiLayer());
 	}
 
 	~SandBox()
