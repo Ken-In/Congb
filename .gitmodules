@@ -7,3 +7,6 @@
 [submodule "Congb/vendor/imgui"]
 	path = Congb/vendor/imgui
 	url = https://github.com/Ken-In/imgui
+[submodule "Congb/vendor/glm"]
+	path = Congb/vendor/glm
+	url = https://github.com/g-truc/glm
