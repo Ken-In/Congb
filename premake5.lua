@@ -24,9 +24,10 @@ include "Congb/vendor/imgui"
 
 project "Congb"
 	location "Congb"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -40,6 +41,11 @@ project "Congb"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -61,7 +67,6 @@ project "Congb"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 		
 		defines
@@ -71,33 +76,29 @@ project "Congb"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/".. outputdir .."/SandBox/\"")
-		}
-
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 
 
 project "SandBox"
 	location "SandBox"
 	kind "ConsoleApp"
+	cppdialect "C++17"
 	language "C++"
-	staticruntime "off"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -122,7 +123,6 @@ project "SandBox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
@@ -133,14 +133,14 @@ project "SandBox"
 	filter "configurations:Debug"
 		defines "CB_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "CB_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "CB_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"

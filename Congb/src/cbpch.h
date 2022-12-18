@@ -9,3 +9,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+
+#ifdef CB_PLATFORM_WINDOWS
+	#include <windows.h>
+#endif // CB_PLATFORM_WINDOWS

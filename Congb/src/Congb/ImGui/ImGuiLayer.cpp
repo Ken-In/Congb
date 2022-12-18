@@ -75,7 +75,7 @@ namespace Congb {
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		Application& app = Application::Get();
-		io.DisplaySize = ImVec2(app.getWindow().GetWidth(), app.getWindow().GetHeight());
+		io.DisplaySize = ImVec2((float)app.getWindow().GetWidth(), (float)app.getWindow().GetHeight());
 
 		// Rendering
 		ImGui::Render();
