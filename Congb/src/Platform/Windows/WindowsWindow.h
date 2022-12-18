@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Congb/Window.h"
+#include "Congb/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"
 
@@ -32,6 +33,7 @@ namespace Congb {
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
