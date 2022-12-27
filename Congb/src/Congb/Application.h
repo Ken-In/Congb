@@ -34,6 +34,8 @@ namespace Congb{
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
+		unsigned int m_VertextArray, m_VertexBuffer, m_IndexBuffer;
+
 		static Application* s_Instance;
 	};
 
