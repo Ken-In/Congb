@@ -8,6 +8,8 @@
 
 #include "Congb/ImGui/ImGuiLayer.h"
 
+#include "Renderer/Shader.h"
+
 
 namespace Congb{
 	class CONGB_API Application
@@ -35,6 +37,7 @@ namespace Congb{
 		LayerStack m_LayerStack;
 
 		unsigned int m_VertextArray, m_VertexBuffer, m_IndexBuffer;
+		std::unique_ptr<Shader> m_Shader;
 
 		static Application* s_Instance;
 	};
