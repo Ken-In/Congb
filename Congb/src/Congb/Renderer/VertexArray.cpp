@@ -10,11 +10,11 @@ namespace Congb {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RenderAPI::None:
+		case RendererAPI::API::None:
 			CB_CORE_ASSERT(false, "RenderAPI::None is not supported!");
 			return nullptr;
 
-		case RenderAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexArray();
 		}
 

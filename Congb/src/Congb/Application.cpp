@@ -3,11 +3,8 @@
 
 #include "Congb/Log.h"
 
-#include "glad/glad.h"
-
 #include "Input.h"
-
-#include <memory>
+#include "Congb/Renderer/Renderer.h"
 
 
 namespace Congb {
@@ -171,16 +168,19 @@ namespace Congb {
 	{
 		while (m_Running)
 		{
-			glClearColor(0.1f, 0.1f, 0.1f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+
+			RenderCommand::SetClearColor({0.1f, 0.1f, 0.1f, 1.0f});
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			m_Shader2->Bind();
-			m_SquareVA->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_SquareVA);
 
 			m_Shader->Bind();
-			m_VertextArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_VertextArray->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertextArray);
+
+			Renderer::EndScene();
 
 			for (auto layer : m_LayerStack)
 				layer->OnUpdate();

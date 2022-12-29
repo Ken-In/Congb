@@ -11,11 +11,11 @@ namespace Congb {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RenderAPI::None: 
+		case RendererAPI::API::None:
 			CB_CORE_ASSERT(false, "RenderAPI::None is not supported!");
 			return nullptr;
 
-		case RenderAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexBuffer(vertices, size);
 		}
 		CB_CORE_ASSERT(false, "Unknown RenderAPI!");
@@ -27,11 +27,11 @@ namespace Congb {
 	{
 		switch (Renderer::GetAPI())
 		{
-		case RenderAPI::None:
+		case RendererAPI::API::None:
 			CB_CORE_ASSERT(false, "RenderAPI::None is not supported!");
 			return nullptr;
 
-		case RenderAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLIndexBuffer(indices, size);
 		}
 		CB_CORE_ASSERT(false, "Unknown RenderAPI!");

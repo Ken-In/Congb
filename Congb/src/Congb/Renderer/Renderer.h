@@ -1,19 +1,18 @@
 #pragma once
 
-namespace Congb {
+#include "RenderCommand.h"
 
-	enum class RenderAPI
-	{
-		None = 0,
-		OpenGL
-	};
+namespace Congb {
 
 	class Renderer
 	{
 	public:
-		inline static RenderAPI GetAPI() { return s_RendererAPI; }
-	private:
-		static RenderAPI s_RendererAPI;
+		static void BeginScene();
+		static void EndScene();
+
+		static void Submit(const std::shared_ptr<VertexArray>& vertexArray);
+
+		inline static RendererAPI::API GetAPI() { return  RendererAPI::GetAPI(); }
 	};
 
 }
