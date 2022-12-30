@@ -11,6 +11,7 @@
 #include "Renderer/Shader.h"
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
+#include "Congb/Renderer/OrthographicCamera.h"
 
 
 namespace Congb{
@@ -41,8 +42,10 @@ namespace Congb{
 		std::shared_ptr<Shader> m_Shader;
 		std::shared_ptr<VertexArray> m_VertextArray;
 
-		std::shared_ptr<Shader> m_Shader2;
+		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 
 		static Application* s_Instance;
 	};

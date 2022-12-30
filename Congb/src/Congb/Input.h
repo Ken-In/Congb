@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Congb/Core.h"
+#include "KeyCodes.h"
 
 namespace Congb {
 
