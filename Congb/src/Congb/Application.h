@@ -8,14 +8,8 @@
 
 #include "Congb/ImGui/ImGuiLayer.h"
 
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
-#include "Congb/Renderer/OrthographicCamera.h"
-
-
 namespace Congb{
-	class CONGB_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -38,14 +32,6 @@ namespace Congb{
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertextArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
 
 		static Application* s_Instance;
 	};

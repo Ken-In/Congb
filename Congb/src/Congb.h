@@ -12,6 +12,19 @@
 
 #include "Congb/ImGui/ImGuiLayer.h"
 
+//-----Renderer---------------
+
+
+#include "Congb/Renderer/Renderer.h"
+#include "Congb/Renderer/RenderCommand.h"
+
+#include "Congb/Renderer/Buffer.h"
+#include "Congb/Renderer/Shader.h"
+#include "Congb/Renderer/VertexArray.h"
+
+#include "Congb/Renderer/OrthographicCamera.h"
+
+
 //-----Entry Point---------------
 #include "Congb/EntryPoint.h"
 
