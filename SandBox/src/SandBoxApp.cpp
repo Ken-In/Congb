@@ -118,22 +118,24 @@ public:
 
 	}
 
-	void OnUpdate() override
+	void OnUpdate(Congb::Timestep timestep) override
 	{
+		CB_TRACE("Delta Time: {0}s ({1}ms)", timestep.GetSeconds(), timestep.GetMilliseconds());
+
 		if (Congb::Input::IsKeyPressed(CB_KEY_LEFT))
-			m_CameraPosition.x -= m_CameraSpeed;
+			m_CameraPosition.x -= m_CameraSpeed * timestep;
 		else if (Congb::Input::IsKeyPressed(CB_KEY_RIGHT))
-			m_CameraPosition.x += m_CameraSpeed;
+			m_CameraPosition.x += m_CameraSpeed * timestep;
 
 		if (Congb::Input::IsKeyPressed(CB_KEY_UP))
-			m_CameraPosition.y += m_CameraSpeed;
+			m_CameraPosition.y += m_CameraSpeed * timestep;
 		else if (Congb::Input::IsKeyPressed(CB_KEY_DOWN))
-			m_CameraPosition.y -= m_CameraSpeed;
+			m_CameraPosition.y -= m_CameraSpeed * timestep;
 
 		if (Congb::Input::IsKeyPressed(CB_KEY_A))
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * timestep;
 		else if (Congb::Input::IsKeyPressed(CB_KEY_D))
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * timestep;
 
 		Congb::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1.0f });
 		Congb::RenderCommand::Clear();
@@ -168,9 +170,9 @@ private:
 
 	Congb::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
-	float m_CameraSpeed = 0.01f;
+	float m_CameraSpeed = 1.0f;
 	float m_CameraRotation = 0.0f;
-	float m_CameraRotationSpeed = 1.0f;
+	float m_CameraRotationSpeed = 50.0f;
 };
 
 class SandBox : public Congb::Application

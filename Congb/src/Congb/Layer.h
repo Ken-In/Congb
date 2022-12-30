@@ -2,6 +2,7 @@
 
 #include "Congb/Core.h"
 #include "Congb/Events/Event.h"
+#include "Congb/Core/Timestep.h"
 
 namespace Congb {
 
@@ -13,7 +14,7 @@ namespace Congb {
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		virtual void OnEvent(Event& event) {}
 

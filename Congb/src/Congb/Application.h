@@ -6,6 +6,8 @@
 #include "Events/Event.h"
 #include "Congb/Events/ApplicationEvent.h"
 
+#include "Congb/Core/Timestep.h"
+
 #include "Congb/ImGui/ImGuiLayer.h"
 
 namespace Congb{
@@ -32,6 +34,7 @@ namespace Congb{
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
 
 		static Application* s_Instance;
 	};

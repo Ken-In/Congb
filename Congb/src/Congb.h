@@ -6,6 +6,8 @@
 #include "Congb/Layer.h"
 #include "Congb/Log.h"
 
+#include "Congb/Core/Timestep.h"
+
 #include "Congb/Input.h"
 #include "Congb/KeyCodes.h"
 #include "Congb/MouseButtonCodes.h"
