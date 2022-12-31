@@ -2,8 +2,10 @@
 #include "Congb.h"
 
 #include "imgui/imgui.h"
+#include "Platform/OpenGL/OpenGLShader.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class ExampleLayer : public Congb::Layer
 {
@@ -85,7 +87,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(new Congb::Shader(vertexSrc, fragmentSrc));
+		m_Shader.reset(Congb::Shader::Create(vertexSrc, fragmentSrc));
 
 
 		std::string vertexSrc2 = R"(
@@ -110,15 +112,16 @@ public:
 			
 			layout(location = 0) out vec4 color;
 			
+			uniform vec3 u_Color;
 			in vec3 v_Position;			
 
 			void main()
 			{
-				color = vec4(0.2f, 0.3f, 0.8f, 1.0f);
+				color = vec4(u_Color, 1.0f);
 			}
 		)";
 
-		m_BlueShader.reset(new Congb::Shader(vertexSrc2, fragmentSrc2));
+		m_BlueShader.reset(Congb::Shader::Create(vertexSrc2, fragmentSrc2));
 
 	}
 
@@ -152,6 +155,9 @@ public:
 
 		static glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
+		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_BlueShader)->Bind();
+		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_BlueShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+
 		for (int y = 0; y < 20; y++)
 		{
 			for (int x = 0; x < 20; x++)
@@ -170,7 +176,9 @@ public:
 
 	void OnImGuiRender() override
 	{
-
+		ImGui::Begin("Settings");
+		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
+		ImGui::End();
 	}
 
 	void OnEvent(Congb::Event& event) override
@@ -188,9 +196,11 @@ private:
 	Congb::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
 	float m_CameraSpeed = 1.0f;
+
 	float m_CameraRotation = 0.0f;
 	float m_CameraRotationSpeed = 50.0f;
 
+	glm::vec3 m_SquareColor = { 0.2f, 0.3f, 0.8f };
 };
 
 class SandBox : public Congb::Application
