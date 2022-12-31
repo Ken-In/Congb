@@ -21,7 +21,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f
 		};
 
-		std::shared_ptr<Congb::VertexBuffer> vertexBuffer;
+		Congb::Ref<Congb::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Congb::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		Congb::BufferLayout layout = {
@@ -33,7 +33,7 @@ public:
 		m_VertextArray->AddVertexBuffer(vertexBuffer);
 
 		unsigned int indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Congb::IndexBuffer> indexBuffer;
+		Congb::Ref<Congb::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Congb::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertextArray->SetIndexBuffer(indexBuffer);
 
@@ -46,7 +46,7 @@ public:
 			-0.5f,  0.5f, 0.0f,
 		};
 
-		std::shared_ptr<Congb::VertexBuffer> squareVB;
+		Congb::Ref<Congb::VertexBuffer> squareVB;
 		squareVB.reset(Congb::VertexBuffer::Create(squareBVertices, sizeof(squareBVertices)));
 		squareVB->SetLayout({
 			{ Congb::ShaderDataType::Float3, "a_Position"}
@@ -54,7 +54,7 @@ public:
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		unsigned int squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		std::shared_ptr<Congb::IndexBuffer> squareIB;
+		Congb::Ref<Congb::IndexBuffer> squareIB;
 		squareIB.reset(Congb::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
@@ -187,11 +187,11 @@ public:
 	}
 
 private:
-	std::shared_ptr<Congb::Shader> m_Shader;
-	std::shared_ptr<Congb::VertexArray> m_VertextArray;
+	Congb::Ref<Congb::Shader> m_Shader;
+	Congb::Ref<Congb::VertexArray> m_VertextArray;
 
-	std::shared_ptr<Congb::Shader> m_BlueShader;
-	std::shared_ptr<Congb::VertexArray> m_SquareVA;
+	Congb::Ref<Congb::Shader> m_BlueShader;
+	Congb::Ref<Congb::VertexArray> m_SquareVA;
 
 	Congb::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
