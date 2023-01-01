@@ -22,6 +22,7 @@
 
 #include "Congb/Renderer/Buffer.h"
 #include "Congb/Renderer/Shader.h"
+#include "Congb/Renderer/Texture.h"
 #include "Congb/Renderer/VertexArray.h"
 
 #include "Congb/Renderer/OrthographicCamera.h"

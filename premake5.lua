@@ -17,6 +17,7 @@ IncludeDir["GLFW"] = "Congb/vendor/GLFW/include"
 IncludeDir["Glad"] = "Congb/vendor/Glad/include"
 IncludeDir["ImGui"] = "Congb/vendor/imgui"
 IncludeDir["glm"] = "Congb/vendor/glm"
+IncludeDir["stb_image"] = "Congb/vendor/stb_image"
 
 include "Congb/vendor/GLFW"
 include "Congb/vendor/Glad"
@@ -39,6 +40,8 @@ project "Congb"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -55,7 +58,8 @@ project "Congb"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links

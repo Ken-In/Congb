@@ -39,17 +39,18 @@ public:
 
 		m_SquareVA.reset(Congb::VertexArray::Create());
 
-		float squareBVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f,
+		float squareBVertices[4 * 5] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		Congb::Ref<Congb::VertexBuffer> squareVB;
 		squareVB.reset(Congb::VertexBuffer::Create(squareBVertices, sizeof(squareBVertices)));
 		squareVB->SetLayout({
-			{ Congb::ShaderDataType::Float3, "a_Position"}
+			{ Congb::ShaderDataType::Float3, "a_Position"},
+			{ Congb::ShaderDataType::Float2, "a_TexCoord"}
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -123,6 +124,45 @@ public:
 
 		m_BlueShader.reset(Congb::Shader::Create(vertexSrc2, fragmentSrc2));
 
+		std::string textureVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+			
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;			
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Congb::Shader::Create(textureVertexSrc, textureFragmentSrc));
+
+		m_Texture = Congb::Texture2D::Create("assets/textures/Checkerboard.png");
+		//m_Texture = Congb::Texture2D::Create("assets/textures/keqing.png");
+
+		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Congb::Timestep timestep) override
@@ -168,8 +208,10 @@ public:
 			}
 		}
 		
-		
-		Congb::Renderer::Submit(m_Shader, m_VertextArray);
+		m_Texture->Bind();
+		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		//Congb::Renderer::Submit(m_Shader, m_VertextArray);
 
 		Congb::Renderer::EndScene();
 	}
@@ -190,8 +232,10 @@ private:
 	Congb::Ref<Congb::Shader> m_Shader;
 	Congb::Ref<Congb::VertexArray> m_VertextArray;
 
-	Congb::Ref<Congb::Shader> m_BlueShader;
+	Congb::Ref<Congb::Shader> m_BlueShader, m_TextureShader;
 	Congb::Ref<Congb::VertexArray> m_SquareVA;
+
+	Congb::Ref<Congb::Texture2D> m_Texture;
 
 	Congb::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
