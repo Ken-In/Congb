@@ -13,11 +13,15 @@ namespace Congb {
 	{
 	public:
 		OpenGLShader(const std::string& filepath);
-		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
+		OpenGLShader(const std::string& name,const std::string& vertexSrc, const std::string& fragmentSrc);
 		virtual ~OpenGLShader();
 
 		void Bind() const override;
 		void Unbind() const override;
+
+		virtual const std::string& GetName() const override { return m_Name; }
+
+		virtual void SetName(const std::string& name) override { m_Name = name; }
 
 		void UploadUniformInt(const std::string& name, int values);
 
@@ -34,5 +38,6 @@ namespace Congb {
 		void Compile(const std::unordered_map<GLenum, std::string>& shaderSources);
 	private:
 		uint32_t ID;
+		std::string m_Name;
 	};
 }

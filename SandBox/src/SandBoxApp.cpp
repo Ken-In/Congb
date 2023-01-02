@@ -88,7 +88,8 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Congb::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = Congb::Shader::Create("VertexColor", vertexSrc, fragmentSrc);
+		m_ShaderLibrary.Add("VertexColor", m_Shader);
 
 
 		std::string vertexSrc2 = R"(
@@ -122,12 +123,13 @@ public:
 			}
 		)";
 
-		m_BlueShader.reset(Congb::Shader::Create(vertexSrc2, fragmentSrc2));
+		m_BlueShader = Congb::Shader::Create("BlueShader", vertexSrc2, fragmentSrc2);
+		m_ShaderLibrary.Add("BlueShader", m_BlueShader);
 
-		m_TextureShader.reset(Congb::Shader::Create("assets/shaders/Texture.glsl"));
+		m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 		
-		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_ShaderLibrary.Get("Texture"))->Bind();
+		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_ShaderLibrary.Get("Texture"))->UploadUniformInt("u_Texture", 0);
 
 		//¶ÁÎÆÀí
 		m_Texture = Congb::Texture2D::Create("assets/textures/Checkerboard.png");
@@ -182,9 +184,9 @@ public:
 // 		m_Texture->Bind();
 // 		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_KeqingTexture->Bind();
-		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); 
+		Congb::Renderer::Submit(m_ShaderLibrary.Get("Texture"), m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		m_LogoTexture->Bind();
-		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(-1.45f, 0.75f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.15f)));
+		Congb::Renderer::Submit(m_ShaderLibrary.Get("Texture"), m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(-1.45f, 0.75f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.15f)));
 
 
 		//Congb::Renderer::Submit(m_Shader, m_VertextArray);
@@ -205,10 +207,12 @@ public:
 	}
 
 private:
+	Congb::ShaderLibrary m_ShaderLibrary;
+
 	Congb::Ref<Congb::Shader> m_Shader;
 	Congb::Ref<Congb::VertexArray> m_VertextArray;
 
-	Congb::Ref<Congb::Shader> m_BlueShader, m_TextureShader;
+	Congb::Ref<Congb::Shader> m_BlueShader;
 	Congb::Ref<Congb::VertexArray> m_SquareVA;
 
 	Congb::Ref<Congb::Texture2D> m_Texture, m_LogoTexture, m_KeqingTexture;
