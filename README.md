@@ -33,3 +33,6 @@ Congb Engine
 - 添加transform
 - 添加Shader抽象
 - 添加初始纹理
+- 添加blending
+- 添加Shader Assets
+- 添加Shader Library
