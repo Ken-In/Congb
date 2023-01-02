@@ -7,6 +7,3 @@ bin-int/
 *.user
 *.sln
 *.vcxproj*
-Camera.cpp
-Camera.h
-keqing.png

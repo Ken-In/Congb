@@ -124,45 +124,16 @@ public:
 
 		m_BlueShader.reset(Congb::Shader::Create(vertexSrc2, fragmentSrc2));
 
-		std::string textureVertexSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) in vec3 a_Position;
-			layout(location = 1) in vec2 a_TexCoord;
-			
-			uniform mat4 u_ViewProjection;
-			uniform mat4 u_Transform;
-
-			out vec2 v_TexCoord;			
-
-			void main()
-			{
-				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
-			}
-		)";
-
-		std::string textureFragmentSrc = R"(
-			#version 330 core
-			
-			layout(location = 0) out vec4 color;
-			in vec2 v_TexCoord;
-			
-			uniform sampler2D u_Texture;
-
-			void main()
-			{
-				color = texture(u_Texture, v_TexCoord);
-			}
-		)";
-
-		m_TextureShader.reset(Congb::Shader::Create(textureVertexSrc, textureFragmentSrc));
-
-		m_Texture = Congb::Texture2D::Create("assets/textures/Checkerboard.png");
-		m_LogoTexture = Congb::Texture2D::Create("assets/textures/logo.png");
-
+		m_TextureShader.reset(Congb::Shader::Create("assets/shaders/Texture.glsl"));
+		
 		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Congb::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+
+		//¶ÁÎÆÀí
+		m_Texture = Congb::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_LogoTexture = Congb::Texture2D::Create("assets/textures/logo.png");
+		m_KeqingTexture = Congb::Texture2D::Create("assets/textures/keqing.png");
+
 	}
 
 	void OnUpdate(Congb::Timestep timestep) override
@@ -208,10 +179,12 @@ public:
 			}
 		}
 		
-		m_Texture->Bind();
-		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+// 		m_Texture->Bind();
+// 		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		m_KeqingTexture->Bind();
+		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f))); 
 		m_LogoTexture->Bind();
-		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Congb::Renderer::Submit(m_TextureShader, m_SquareVA, glm::translate(glm::mat4(1.0f), glm::vec3(-1.45f, 0.75f, 0.0f)) * glm::scale(glm::mat4(1.0f), glm::vec3(0.15f)));
 
 
 		//Congb::Renderer::Submit(m_Shader, m_VertextArray);
@@ -238,7 +211,7 @@ private:
 	Congb::Ref<Congb::Shader> m_BlueShader, m_TextureShader;
 	Congb::Ref<Congb::VertexArray> m_SquareVA;
 
-	Congb::Ref<Congb::Texture2D> m_Texture, m_LogoTexture;
+	Congb::Ref<Congb::Texture2D> m_Texture, m_LogoTexture, m_KeqingTexture;
 
 	Congb::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
